@@ -4,11 +4,9 @@ class SweetShop {
         this.sweets = [];
     }
 
-    /**
-    * Adds a new sweet to the shop.
-    * @param {Object} sweet - The sweet object with id, name, category, price, and quantity.
-    * Throws an error if a sweet with the same ID already exists.
-    */
+
+    // Adds a new sweet to the shop.
+
     addSweet(sweet) {
         const exists = this.sweets.some(s => s.id === sweet.id);
         if (exists) {
@@ -17,13 +15,21 @@ class SweetShop {
         this.sweets.push(sweet);
     }
 
-    /**
-   * Returns all sweets currently in the shop.
-   * @returns {Array} List of sweets.
-   */
+
+    // Deletes a sweet from the shop by its ID.
+
+    deleteSweet(id) {
+        this.sweets = this.sweets.filter(s => s.id !== id);
+    }
+
+
+    // Returns all sweets currently in the shop.
+
     getAllSweets() {
         return this.sweets;
     }
+
+
 }
 
 module.exports = { SweetShop };
