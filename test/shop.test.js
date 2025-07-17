@@ -45,5 +45,20 @@ describe("SweetShop", () => {
     expect(result[0].name).toBe("Jalebi");
   });
 
+  // Test: Purchase sweet and reduce stock
+  it("should allow purchasing if enough stock", () => {
+    shop.addSweet({ id: 7, name: "Halwa", category: "Veg", price: 20, quantity: 10 });
+    shop.purchaseSweet(7, 5);
+    expect(shop.getAllSweets()[0].quantity).toBe(5);
+  });
+
+  // Test: Error when trying to purchase more than available
+  it("should throw error if not enough stock", () => {
+    shop.addSweet({ id: 8, name: "Peda", category: "Milk", price: 10, quantity: 3 });
+    expect(() => {
+      shop.purchaseSweet(8, 5);
+    }).toThrow("Not enough stock");
+  });
+
 });
 
