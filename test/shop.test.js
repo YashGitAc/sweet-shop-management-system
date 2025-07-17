@@ -60,5 +60,12 @@ describe("SweetShop", () => {
     }).toThrow("Not enough stock");
   });
 
+   // Test: Restock sweet successfully
+  it("should restock sweets", () => {
+    shop.addSweet({ id: 9, name: "Soan Papdi", category: "Flaky", price: 20, quantity: 10 });
+    shop.restockSweet(9, 5);
+    expect(shop.getAllSweets()[0].quantity).toBe(15);
+  });
+
 });
 

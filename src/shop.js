@@ -46,28 +46,37 @@ class SweetShop {
         return this.sweets.filter(s => s.price >= min && s.price <= max);
     }
 
-    
-   // Purchases a sweet by ID and decreases its quantity in stock.
-   
-  purchaseSweet(id, quantity) {
-    const sweet = this.sweets.find(s => s.id === id);
-    if (!sweet) {
-      throw new Error("Sweet not found");
-    }
-    if (sweet.quantity < quantity) {
-      throw new Error("Not enough stock");
-    }
-    sweet.quantity -= quantity;
-  }
 
+    // Purchases a sweet by ID and decreases its quantity in stock.
+
+    purchaseSweet(id, quantity) {
+        const sweet = this.sweets.find(s => s.id === id);
+        if (!sweet) {
+            throw new Error("Sweet not found");
+        }
+        if (sweet.quantity < quantity) {
+            throw new Error("Not enough stock");
+        }
+        sweet.quantity -= quantity;
+    }
+
+
+    // Increases the quantity of a sweet in stock.
+
+    restockSweet(id, quantity) {
+        const sweet = this.sweets.find(s => s.id === id);
+        if (!sweet) {
+            throw new Error("Sweet not found");
+        }
+        sweet.quantity += quantity;
+    }
 
     // Returns all sweets currently in the shop.
 
     getAllSweets() {
         return this.sweets;
     }
-
-
 }
+
 
 module.exports = { SweetShop };
