@@ -71,6 +71,25 @@ class SweetShop {
         sweet.quantity += quantity;
     }
 
+
+    // Sort sweets by name alphabetically (A-Z).
+
+    sortByName() {
+        return [...this.sweets].sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Sort sweets by price in ascending order.
+
+    sortByPrice() {
+        return [...this.sweets].sort((a, b) => a.price - b.price);
+    }
+
+    // Sort sweets by quantity in descending order.
+
+    sortByQuantityDesc() {
+        return [...this.sweets].sort((a, b) => b.quantity - a.quantity);
+    }
+
     // Returns all sweets currently in the shop.
 
     getAllSweets() {

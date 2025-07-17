@@ -60,11 +60,43 @@ describe("SweetShop", () => {
     }).toThrow("Not enough stock");
   });
 
-   // Test: Restock sweet successfully
+  // Test: Restock sweet successfully
   it("should restock sweets", () => {
     shop.addSweet({ id: 9, name: "Soan Papdi", category: "Flaky", price: 20, quantity: 10 });
     shop.restockSweet(9, 5);
     expect(shop.getAllSweets()[0].quantity).toBe(15);
+  });
+
+  // Test: Sort sweets by name (A-Z)
+  it("should sort sweets by name alphabetically", () => {
+    shop.addSweet({ id: 1, name: "Rasgulla", category: "Milk", price: 20, quantity: 10 });
+    shop.addSweet({ id: 2, name: "Barfi", category: "Milk", price: 30, quantity: 15 });
+    shop.addSweet({ id: 3, name: "Kaju Katli", category: "Nut-Based", price: 50, quantity: 5 });
+
+    const sorted = shop.sortByName();
+    expect(sorted[0].name).toBe("Barfi");
+    expect(sorted[1].name).toBe("Kaju Katli");
+    expect(sorted[2].name).toBe("Rasgulla");
+  });
+
+  // Test: Sort sweets by price (low to high)
+  it("should sort sweets by price ascending", () => {
+    shop.addSweet({ id: 1, name: "A", category: "Milk", price: 50, quantity: 5 });
+    shop.addSweet({ id: 2, name: "B", category: "Milk", price: 10, quantity: 15 });
+    shop.addSweet({ id: 3, name: "C", category: "Milk", price: 30, quantity: 10 });
+
+    const sorted = shop.sortByPrice();
+    expect(sorted.map(s => s.price)).toEqual([10, 30, 50]);
+  });
+
+  // Test: Sort sweets by quantity (high to low)
+  it("should sort sweets by quantity descending", () => {
+    shop.addSweet({ id: 1, name: "A", category: "Milk", price: 10, quantity: 5 });
+    shop.addSweet({ id: 2, name: "B", category: "Milk", price: 10, quantity: 20 });
+    shop.addSweet({ id: 3, name: "C", category: "Milk", price: 10, quantity: 15 });
+
+    const sorted = shop.sortByQuantityDesc();
+    expect(sorted.map(s => s.quantity)).toEqual([20, 15, 5]);
   });
 
 });
